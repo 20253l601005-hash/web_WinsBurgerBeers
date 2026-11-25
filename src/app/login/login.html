@@ -1,0 +1,172 @@
+<section class="login-section d-flex align-items-center justify-content-center py-5">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-10 col-xl-9">
+        <div class="login-card rounded-4 overflow-hidden shadow-lg">
+          <div class="row g-0">
+            
+            <!-- COLUMNA IZQUIERDA -->
+            <div class="col-md-5 login-banner d-none d-md-flex flex-column justify-content-between p-4 p-lg-5 text-white position-relative">
+              <div class="banner-overlay"></div>
+              <div class="position-relative z-2">
+                <div class="d-inline-flex align-items-center gap-2 px-3 py-1 rounded-pill badge-admin mb-3">
+                  <i class="bi bi-shield-lock-fill text-orange"></i>
+                  <span class="small fw-bold text-uppercase tracking-wide">Acceso Administrativo</span>
+                </div>
+                <h3 class="fw-black text-uppercase lh-sm">
+                  Wing's <span class="text-orange">Burger & Beer's</span>
+                </h3>
+                <p class="text-light-muted small mt-2">
+                  Gestiona el menú, precios, promociones e inventario de nuestra sucursal en Córdoba, Veracruz.
+                </p>
+              </div>
+
+              <div class="position-relative z-2 pt-3 border-top border-light border-opacity-10">
+                <p class="text-light-muted small mb-2">Acceso rápido de demostración:</p>
+                <button type="button" (click)="llenarDemoFakeStore()" class="btn btn-sm btn-outline-warning rounded-pill w-100 fw-semibold">
+                  <i class="bi bi-person-badge me-1"></i> Cargar cuenta Gerente Demo
+                </button>
+              </div>
+            </div>
+
+            <!-- COLUMNA DERECHA -->
+            <div class="col-md-7 login-form-panel p-4 p-sm-5 text-white d-flex flex-column justify-content-center">
+              
+              <!-- Pestañas Login / Registro -->
+              <div class="d-flex gap-2 mb-4 border-bottom border-secondary border-opacity-25 pb-3">
+                <button type="button" (click)="cambiarVista('login')" class="btn btn-sm rounded-pill px-3 fw-bold"
+                  [ngClass]="vista === 'login' ? 'btn-orange' : 'btn-outline-secondary text-light'">
+                  Iniciar Sesión
+                </button>
+                <button type="button" (click)="cambiarVista('registro')" class="btn btn-sm rounded-pill px-3 fw-bold"
+                  [ngClass]="vista === 'registro' ? 'btn-orange' : 'btn-outline-secondary text-light'">
+                  Crear Cuenta
+                </button>
+              </div>
+
+              <!-- Alertas -->
+              <div *ngIf="mensajeError" class="alert alert-danger d-flex align-items-center gap-2 rounded-3 py-2 px-3 mb-3">
+                <i class="bi bi-exclamation-triangle-fill"></i>
+                <span class="small fw-semibold">{{ mensajeError }}</span>
+              </div>
+              <div *ngIf="mensajeExito" class="alert alert-success d-flex align-items-center gap-2 rounded-3 py-2 px-3 mb-3">
+                <i class="bi bi-check-circle-fill"></i>
+                <span class="small fw-semibold">{{ mensajeExito }}</span>
+              </div>
+
+              <!-- VISTA 1: LOGIN -->
+              <form *ngIf="vista === 'login'" #loginForm="ngForm" (ngSubmit)="iniciarSesion(loginForm)">
+                <h3 class="fw-black text-uppercase mb-1">Iniciar Sesión</h3>
+                <p class="text-light-muted small mb-4">Ingresa tus credenciales de personal autorizado.</p>
+
+                <div class="mb-3">
+                  <label class="form-label small text-light fw-semibold">Usuario o Correo *</label>
+                  <div class="input-group custom-input-group">
+                    <span class="input-group-text"><i class="bi bi-person-fill text-orange"></i></span>
+                    <input type="text" name="usuario" [(ngModel)]="usuario" required class="form-control custom-input text-white" placeholder="Ingresa tu usuario" />
+                  </div>
+                </div>
+
+                <div class="mb-3">
+                  <label class="form-label small text-light fw-semibold">Contraseña *</label>
+                  <div class="input-group custom-input-group">
+                    <span class="input-group-text"><i class="bi bi-lock-fill text-orange"></i></span>
+                    <input [type]="mostrarPassword ? 'text' : 'password'" name="password" [(ngModel)]="password" required class="form-control custom-input text-white" placeholder="••••••••" />
+                    <button type="button" class="btn btn-toggle-pass" (click)="mostrarPassword = !mostrarPassword">
+                      <i class="bi" [ngClass]="mostrarPassword ? 'bi-eye-slash-fill' : 'bi-eye-fill'"></i>
+                    </button>
+                  </div>
+                </div>
+
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                  <button type="button" (click)="llenarDemoFakeStore()" class="btn btn-link text-warning p-0 small text-decoration-none d-md-none">
+                    Cargar cuenta Demo
+                  </button>
+                  <button type="button" (click)="cambiarVista('recuperar')" class="btn btn-link text-light-muted p-0 small text-decoration-none ms-auto">
+                    ¿Olvidaste tu contraseña?
+                  </button>
+                </div>
+
+                <button type="submit" [disabled]="loginForm.invalid || cargando" class="btn btn-orange w-100 py-3 rounded-pill fw-bold shadow">
+                  <span *ngIf="cargando" class="spinner-border spinner-border-sm me-2"></span>
+                  {{ cargando ? 'Verificando acceso...' : 'Ingresar al Panel' }}
+                </button>
+              </form>
+
+              <!-- VISTA 2: REGISTRO -->
+              <form *ngIf="vista === 'registro'" #regForm="ngForm" (ngSubmit)="registrar(regForm)">
+                <h3 class="fw-black text-uppercase mb-1">Registro de Cuenta</h3>
+                <p class="text-light-muted small mb-3">Completa tus datos para crear un nuevo acceso.</p>
+
+                <div class="row g-2 mb-2">
+                  <div class="col-sm-6">
+                    <label class="form-label small text-light fw-semibold">Nombre *</label>
+                    <input type="text" name="regNombre" [(ngModel)]="regNombre" required minlength="3" class="form-control custom-input-simple text-white" placeholder="Tu nombre" />
+                  </div>
+                  <div class="col-sm-6">
+                    <label class="form-label small text-light fw-semibold">Usuario *</label>
+                    <input type="text" name="regUsername" [(ngModel)]="regUsername" required minlength="3" class="form-control custom-input-simple text-white" placeholder="usuario123" />
+                  </div>
+                </div>
+
+                <div class="mb-2">
+                  <label class="form-label small text-light fw-semibold">Correo Electrónico *</label>
+                  <input type="email" name="regEmail" [(ngModel)]="regEmail" required email class="form-control custom-input-simple text-white" placeholder="correo@ejemplo.com" />
+                </div>
+
+                <div class="row g-2 mb-4">
+                  <div class="col-sm-7">
+                    <label class="form-label small text-light fw-semibold">Contraseña (mín. 4) *</label>
+                    <input type="password" name="regPassword" [(ngModel)]="regPassword" required minlength="4" class="form-control custom-input-simple text-white" placeholder="••••••••" />
+                  </div>
+                  <div class="col-sm-5">
+                    <label class="form-label small text-light fw-semibold">Rol *</label>
+                    <select name="regRol" [(ngModel)]="regRol" class="form-select custom-input-simple text-white">
+                      <option value="admin">Administrador</option>
+                      <option value="cliente">Cliente (Lectura)</option>
+                    </select>
+                  </div>
+                </div>
+
+                <button type="submit" [disabled]="regForm.invalid || cargando" class="btn btn-orange w-100 py-3 rounded-pill fw-bold shadow">
+                  <span *ngIf="cargando" class="spinner-border spinner-border-sm me-2"></span>
+                  Registrar Usuario
+                </button>
+              </form>
+
+              <!-- VISTA 3: RECUPERACIÓN -->
+              <form *ngIf="vista === 'recuperar'" #recForm="ngForm" (ngSubmit)="recuperar(recForm)">
+                <h3 class="fw-black text-uppercase mb-1">Recuperar Contraseña</h3>
+                <p class="text-light-muted small mb-4">Ingresa tu correo registrado para asignar una nueva contraseña.</p>
+
+                <div class="mb-3">
+                  <label class="form-label small text-light fw-semibold">Correo Registrado *</label>
+                  <input type="email" name="recEmail" [(ngModel)]="recEmail" required email class="form-control custom-input-simple text-white" placeholder="correo@ejemplo.com" />
+                </div>
+
+                <div class="mb-4">
+                  <label class="form-label small text-light fw-semibold">Nueva Contraseña *</label>
+                  <input type="password" name="recNuevaPassword" [(ngModel)]="recNuevaPassword" required minlength="4" class="form-control custom-input-simple text-white" placeholder="Nueva contraseña" />
+                </div>
+
+                <button type="submit" [disabled]="recForm.invalid || cargando" class="btn btn-orange w-100 py-3 rounded-pill fw-bold shadow mb-2">
+                  Actualizar Contraseña
+                </button>
+                <button type="button" (click)="cambiarVista('login')" class="btn btn-outline-light w-100 rounded-pill btn-sm">
+                  Volver al Login
+                </button>
+              </form>
+
+              <div class="text-center pt-3 mt-2 border-top border-secondary border-opacity-25">
+                <a routerLink="/" class="text-light-muted text-decoration-none small back-link">
+                  <i class="bi bi-arrow-left me-1 text-orange"></i> Volver a la página principal
+                </a>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

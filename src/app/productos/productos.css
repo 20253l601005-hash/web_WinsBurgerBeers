@@ -1,0 +1,60 @@
+.bg-productos {
+  background-color: #0b0b0b !important;
+}
+
+.bg-dark-card {
+  background-color: #141414 !important;
+  border: 1px solid #242424 !important;
+}
+
+.border-naranja {
+  border: 1px solid #ff5500 !important;
+}
+
+.text-naranja {
+  color: #ff5500 !important;
+}
+
+.bg-naranja {
+  background-color: #ff5500 !important;
+}
+
+.text-secondary-custom {
+  color: #a5a5a5 !important;
+}
+
+.extra-small {
+  font-size: 0.82rem;
+}
+
+.icon-promo {
+  width: 48px;
+  height: 48px;
+  flex-shrink: 0;
+}
+
+.img-box {
+  height: 170px;
+  background-color: #1a1a1a;
+}
+
+.card-producto {
+  transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card-producto:hover {
+  transform: translateY(-5px);
+  border-color: #ff5500 !important;
+  box-shadow: 0 10px 20px rgba(255, 85, 0, 0.15) !important;
+}
+
+.btn-naranja {
+  background-color: #ff5500 !important;
+  color: #ffffff !important;
+  border: none;
+  transition: all 0.3s ease;
+}
+
+.btn-naranja:hover {
+  background-color: #e04b00 !important;
+}

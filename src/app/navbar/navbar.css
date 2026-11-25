@@ -1,0 +1,36 @@
+/* Fondo oscuro idéntico a la marca */
+.bg-dark-navbar {
+  background-color: #111111 !important;
+}
+
+/* Color naranja del logo */
+.text-naranja, .border-naranja {
+  color: #ff5500 !important;
+  border-color: #ff5500 !important;
+}
+
+/* Enlaces de navegación */
+.text-light-custom {
+  color: #cccccc !important;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+.text-light-custom:hover, 
+.nav-link.active {
+  color: #ff5500 !important;
+}
+
+/* Botón de Inicio de Sesión */
+.btn-naranja-nav {
+  background-color: #ff5500 !important;
+  border-color: #ff5500 !important;
+  color: #ffffff !important;
+  transition: all 0.3s ease;
+}
+
+.btn-naranja-nav:hover {
+  background-color: #e04b00 !important;
+  border-color: #e04b00 !important;
+  box-shadow: 0 4px 12px rgba(255, 85, 0, 0.3) !important;
+}

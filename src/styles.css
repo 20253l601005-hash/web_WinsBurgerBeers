@@ -1,1 +1,55 @@
-/* You can add global styles to this file, and also import other style files */
+@import 'bootstrap/dist/css/bootstrap.min.css';
+@import 'bootstrap-icons/font/bootstrap-icons.css';
+
+:root {
+  --bg-main: #121212;
+  --bg-card: #1e1e1e;
+  --text-primary: #ffffff;
+  --text-muted: #a0a0a0;
+  --border-color: #333333;
+  --brand-orange: #fd7e14;
+}
+
+body {
+  background-color: var(--bg-main) !important;
+  color: var(--text-primary);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  min-height: 100vh;
+}
+
+/* Colores de marca y botones */
+.btn-orange {
+  background-color: var(--brand-orange);
+  border-color: var(--brand-orange);
+  color: #ffffff;
+  font-weight: 600;
+}
+
+.btn-orange:hover {
+  background-color: #e06b0d;
+  border-color: #e06b0d;
+  color: #ffffff;
+}
+
+.bg-orange {
+  background-color: var(--brand-orange) !important;
+}
+
+.text-orange {
+  color: var(--brand-orange) !important;
+}
+
+/* Estilos de inputs al seleccionar (focus) */
+.form-control:focus {
+  background-color: #1a1a1a !important;
+  color: #ffffff !important;
+  border-color: var(--brand-orange) !important;
+  box-shadow: 0 0 0 0.25rem rgba(253, 126, 20, 0.25) !important;
+}
+
+/* Cards para el tema oscuro */
+.card-sencilla {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-color);
+  box-shadow: none !important;
+}

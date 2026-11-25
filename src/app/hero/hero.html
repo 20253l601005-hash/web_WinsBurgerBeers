@@ -1,0 +1,351 @@
+<!-- SECCIÓN 1: HERO PRINCIPAL ASIMÉTRICO -->
+<section class="hero-section position-relative overflow-hidden py-5">
+  <div class="container py-lg-4">
+    <div class="row align-items-center g-5">
+      <div class="col-lg-6 text-white z-2">
+        <div class="d-inline-flex align-items-center gap-2 px-3 py-1 rounded-pill badge-brand mb-3">
+          <i class="bi bi-fire text-orange"></i>
+          <span class="small fw-bold text-uppercase tracking-wide">El mejor spot en Córdoba, Ver.</span>
+        </div>
+
+        <h1 class="display-3 fw-black text-uppercase lh-1 mb-3">
+          Alitas épicas, <span class="text-orange">Burgers</span> jugosas y <span class="text-orange">Chelas</span> heladas
+        </h1>
+
+        <p class="lead text-light-muted mb-4">
+          Salsas artesanales hechas en casa, carne 100% de res al carbón y el mejor ambiente para disfrutar tus partidos favoritos con la banda.
+        </p>
+
+        <div class="d-flex flex-wrap gap-3 mb-5">
+          <a routerLink="/productos" class="btn btn-orange btn-lg rounded-pill px-4 py-3 fw-bold shadow-lg d-flex align-items-center gap-2">
+            <i class="bi bi-journal-richtext"></i> Ver Menú Completo
+          </a>
+          <a
+            href="https://wa.me/522711707459?text=%C2%A1Hola%20Wing%27s%20Burger%20%26%20Beer%27s!%20Quiero%20hacer%20un%20pedido."
+            target="_blank"
+            rel="noopener noreferrer"
+            class="btn btn-outline-light btn-lg rounded-pill px-4 py-3 fw-bold d-flex align-items-center gap-2"
+          >
+            <i class="bi bi-whatsapp text-success"></i> Pedir por WhatsApp
+          </a>
+        </div>
+
+        <div class="row g-3 pt-3 border-top border-secondary border-opacity-25">
+          <div class="col-4">
+            <h4 class="fw-black text-orange mb-0">+12</h4>
+            <small class="text-light-muted">Salsas únicas</small>
+          </div>
+          <div class="col-4">
+            <h4 class="fw-black text-orange mb-0">100%</h4>
+            <small class="text-light-muted">Carne fresca</small>
+          </div>
+          <div class="col-4">
+            <h4 class="fw-black text-orange mb-0">4.9 ★</h4>
+            <small class="text-light-muted">Calificación</small>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-6 position-relative">
+        <div class="hero-img-wrapper position-relative mx-auto">
+          <img
+            src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?q=80&w=1000&auto=format&fit=crop"
+            alt="Hamburguesa Doble con Tocino Wing's Burger & Beer's"
+            class="img-fluid rounded-4 shadow-lg hero-main-img"
+          />
+
+          <div class="floating-card top-card p-3 rounded-4 shadow-lg d-flex align-items-center gap-3">
+            <div class="icon-badge rounded-circle bg-orange text-white d-flex align-items-center justify-content-center">
+              <i class="bi bi-lightning-charge-fill fs-5"></i>
+            </div>
+            <div>
+              <span class="d-block fw-bold text-white small">Preparadas al momento</span>
+              <span class="text-light-muted" style="font-size: 0.75rem;">Calientes y crujientes</span>
+            </div>
+          </div>
+
+          <div class="floating-card bottom-card p-3 rounded-4 shadow-lg">
+            <div class="d-flex align-items-center gap-2 mb-1">
+              <span class="badge bg-success">Abierto Hoy</span>
+              <span class="text-warning small">★★★★★</span>
+            </div>
+            <p class="text-white small fw-semibold mb-0">
+              "Las mejores alitas y burgers de Córdoba"
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SECCIÓN 2: CARRUSEL DE PROMOCIONES Y COMBOS -->
+<section class="ofertas-section py-5">
+  <div class="container">
+    <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-end mb-4">
+      <div>
+        <span class="text-orange text-uppercase fw-bold small tracking-wide">
+          <i class="bi bi-tag-fill me-1"></i> Promos de la semana
+        </span>
+        <h2 class="fw-black text-white text-uppercase mb-0">
+          Combos <span class="text-orange">Irresistibles</span>
+        </h2>
+      </div>
+
+      <div class="d-flex gap-2 mt-3 mt-md-0">
+        <button (click)="anterior()" class="btn btn-outline-light rounded-circle carousel-nav-btn" aria-label="Anterior">
+          <i class="bi bi-chevron-left"></i>
+        </button>
+        <button (click)="siguiente()" class="btn btn-orange rounded-circle carousel-nav-btn" aria-label="Siguiente">
+          <i class="bi bi-chevron-right"></i>
+        </button>
+      </div>
+    </div>
+
+    <div
+      class="oferta-card rounded-4 overflow-hidden shadow-lg"
+      (mouseenter)="detenerAutoPlay()"
+      (mouseleave)="iniciarAutoPlay()"
+    >
+      <div class="row g-0 align-items-center">
+        <div class="col-lg-6 position-relative">
+          <img
+            [src]="ofertas[activeSlide].imagen"
+            [alt]="ofertas[activeSlide].titulo"
+            class="w-100 oferta-img"
+          />
+          <span class="position-absolute top-0 start-0 m-3 badge px-3 py-2 rounded-pill fw-bold" [ngClass]="ofertas[activeSlide].badgeClass">
+            {{ ofertas[activeSlide].badge }}
+          </span>
+        </div>
+
+        <div class="col-lg-6 p-4 p-md-5 text-white">
+          <p class="text-orange fw-bold small text-uppercase mb-1">{{ ofertas[activeSlide].subtitulo }}</p>
+          <h3 class="display-6 fw-black text-uppercase mb-3">{{ ofertas[activeSlide].titulo }}</h3>
+          <p class="text-light-muted mb-4">{{ ofertas[activeSlide].descripcion }}</p>
+
+          <div class="d-flex flex-wrap gap-2 mb-4">
+            <span *ngFor="let item of ofertas[activeSlide].incluye" class="badge bg-dark border border-secondary px-3 py-2 rounded-pill">
+              <i class="bi bi-check2-circle text-orange me-1"></i> {{ item }}
+            </span>
+          </div>
+
+          <div class="d-flex flex-wrap align-items-center justify-content-between gap-3 pt-3 border-top border-secondary border-opacity-25">
+            <div>
+              <span class="text-light-muted text-decoration-line-through me-2">{{ ofertas[activeSlide].precioOriginal }}</span>
+              <span class="fs-2 fw-black text-orange">{{ ofertas[activeSlide].precioOferta }}</span>
+              <span class="badge bg-success bg-opacity-25 text-success ms-2">{{ ofertas[activeSlide].ahorro }}</span>
+            </div>
+
+            <a
+              [href]="'https://wa.me/522711707459?text=' + ofertas[activeSlide].titulo"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="btn btn-orange rounded-pill px-4 py-2 fw-bold shadow"
+            >
+              <i class="bi bi-whatsapp me-1"></i> {{ ofertas[activeSlide].botonTexto }}
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="d-flex justify-content-center gap-2 mt-4">
+      <button
+        *ngFor="let oferta of ofertas; let i = index"
+        (click)="irASlide(i)"
+        class="slide-dot border-0 rounded-pill"
+        [class.active]="i === activeSlide"
+        [attr.aria-label]="'Ir a promoción ' + (i + 1)"
+      ></button>
+    </div>
+  </div>
+</section>
+<!-- SECCIÓN 3: CATEGORÍAS DESTACADAS -->
+<section class="categorias-section py-5">
+  <div class="container">
+    <div class="text-center mb-5">
+      <span class="text-orange text-uppercase fw-bold small tracking-wide">Explora el sabor</span>
+      <h2 class="fw-black text-white text-uppercase">Nuestras <span class="text-orange">Especialidades</span></h2>
+    </div>
+
+    <div class="row g-4">
+      <div class="col-md-4">
+        <div class="cat-card p-4 rounded-4 text-white h-100">
+          <div class="cat-icon rounded-3 mb-3 d-flex align-items-center justify-content-center">
+            <i class="bi bi-fire fs-3 text-orange"></i>
+          </div>
+          <h4 class="fw-bold">Alitas & Boneless</h4>
+          <p class="text-light-muted small mb-3">
+            Bañadas en más de 12 salsas: Mango Habanero, BBQ Miel, Búfalo Hot, Parmesano Ajo y más.
+          </p>
+          <a routerLink="/productos" class="text-orange fw-bold text-decoration-none small">
+            Ver opciones <i class="bi bi-arrow-right ms-1"></i>
+          </a>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="cat-card p-4 rounded-4 text-white h-100">
+          <div class="cat-icon rounded-3 mb-3 d-flex align-items-center justify-content-center">
+            <i class="bi bi-award-fill fs-3 text-orange"></i>
+          </div>
+          <h4 class="fw-bold">Burgers Artesanales</h4>
+          <p class="text-light-muted small mb-3">
+            Pan brioche dorado, carne jugosa, quesos fundidos, aros de cebolla y tocino crujiente.
+          </p>
+          <a routerLink="/productos" class="text-orange fw-bold text-decoration-none small">
+            Ver opciones <i class="bi bi-arrow-right ms-1"></i>
+          </a>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="cat-card p-4 rounded-4 text-white h-100">
+          <div class="cat-icon rounded-3 mb-3 d-flex align-items-center justify-content-center">
+            <i class="bi bi-cup-straw fs-3 text-orange"></i>
+          </div>
+          <h4 class="fw-bold">Cervezas & Bebidas</h4>
+          <p class="text-light-muted small mb-3">
+            Tarros helados, micheladas preparadas, cubetazos y bebidas refrescantes para acompañar.
+          </p>
+          <a routerLink="/productos" class="text-orange fw-bold text-decoration-none small">
+            Ver opciones <i class="bi bi-arrow-right ms-1"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SECCIÓN 4: SALSAS DE LA CASA Y AMBIENTE -->
+<section class="experiencia-section py-5">
+  <div class="container">
+    <div class="row align-items-end mb-5">
+      <div class="col-lg-7">
+        <span class="text-orange text-uppercase fw-bold small tracking-wide">
+          <i class="bi bi-droplet-fill me-1"></i> El secreto del sabor
+        </span>
+        <h2 class="fw-black text-white text-uppercase mb-0">
+          Elige tu nivel de <span class="text-orange">Intensidad</span>
+        </h2>
+      </div>
+      <div class="col-lg-5 text-lg-end mt-2 mt-lg-0">
+        <p class="text-light-muted small mb-0">
+          Todas nuestras salsas se preparan diariamente con ingredientes frescos para bañar tus alitas o boneless.
+        </p>
+      </div>
+    </div>
+
+    <div class="row g-3 mb-5">
+      <div class="col-6 col-lg-3">
+        <div class="salsa-card p-4 rounded-4 h-100">
+          <div class="d-flex justify-content-between align-items-center mb-3">
+            <span class="badge bg-success bg-opacity-25 text-success px-3 py-1 rounded-pill fw-bold">Suave</span>
+            <span class="text-warning small">🌶️</span>
+          </div>
+          <h5 class="text-white fw-bold mb-2">BBQ Miel & Parmesano</h5>
+          <p class="text-light-muted small mb-0">
+            Dulce, ahumada o cremosa con ajo rostizado. Ideal para disfrutar sin picante.
+          </p>
+        </div>
+      </div>
+
+      <div class="col-6 col-lg-3">
+        <div class="salsa-card p-4 rounded-4 h-100">
+          <div class="d-flex justify-content-between align-items-center mb-3">
+            <span class="badge bg-warning bg-opacity-25 text-warning px-3 py-1 rounded-pill fw-bold">Medio</span>
+            <span class="text-warning small">🌶️🌶️</span>
+          </div>
+          <h5 class="text-white fw-bold mb-2">Tamarindo & Chipotle</h5>
+          <p class="text-light-muted small mb-0">
+            El balance perfecto entre acidez frutal y el toque ahumado del chile chipotle.
+          </p>
+        </div>
+      </div>
+
+      <div class="col-6 col-lg-3">
+        <div class="salsa-card p-4 rounded-4 h-100">
+          <div class="d-flex justify-content-between align-items-center mb-3">
+            <span class="badge bg-orange bg-opacity-25 text-orange px-3 py-1 rounded-pill fw-bold">Picante</span>
+            <span class="text-warning small">🌶️🌶️🌶️</span>
+          </div>
+          <h5 class="text-white fw-bold mb-2">Búfalo Clásica & Mango</h5>
+          <p class="text-light-muted small mb-0">
+            Nuestra receta insignia con mantequilla especiada o mango natural con habanero.
+          </p>
+        </div>
+      </div>
+
+      <div class="col-6 col-lg-3">
+        <div class="salsa-card p-4 rounded-4 h-100 border-danger-subtle">
+          <div class="d-flex justify-content-between align-items-center mb-3">
+            <span class="badge bg-danger bg-opacity-25 text-danger px-3 py-1 rounded-pill fw-bold">Extremo</span>
+            <span class="text-warning small">🌶️🌶️🌶️🌶️</span>
+          </div>
+          <h5 class="text-white fw-bold mb-2">Diabla Habanero</h5>
+          <p class="text-light-muted small mb-0">
+            Solo para valientes. Habanero tatemado con especias secretas de la casa.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="ambiente-banner rounded-4 p-4 p-md-5 text-white">
+      <div class="row align-items-center g-4">
+        <div class="col-lg-7">
+          <span class="badge bg-orange text-white text-uppercase px-3 py-2 rounded-pill mb-3">
+            <i class="bi bi-tv-fill me-1"></i> Deportes en Vivo & Buen Ambiente
+          </span>
+          <h3 class="fw-black text-uppercase mb-3">
+            El punto de reunión favorito en <span class="text-orange">Córdoba</span>
+          </h3>
+          <p class="text-light-muted mb-4">
+            Pantallas HD para ver la Liga MX, Champions, NFL y UFC mientras disfrutas de tarros bien fríos, música y el mejor servicio.
+          </p>
+          <div class="d-flex flex-wrap gap-4">
+            <div class="d-flex align-items-center gap-2">
+              <i class="bi bi-check-circle-fill text-orange fs-5"></i>
+              <span class="small fw-semibold">Pantallas HD</span>
+            </div>
+            <div class="d-flex align-items-center gap-2">
+              <i class="bi bi-check-circle-fill text-orange fs-5"></i>
+              <span class="small fw-semibold">Servicio a domicilio</span>
+            </div>
+            <div class="d-flex align-items-center gap-2">
+              <i class="bi bi-check-circle-fill text-orange fs-5"></i>
+              <span class="small fw-semibold">Ambiente 100% familiar</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-5">
+          <div class="review-box p-4 rounded-4">
+            <div class="d-flex justify-content-between align-items-center mb-2">
+              <div class="text-warning">
+                <i class="bi bi-star-fill"></i>
+                <i class="bi bi-star-fill"></i>
+                <i class="bi bi-star-fill"></i>
+                <i class="bi bi-star-fill"></i>
+                <i class="bi bi-star-fill"></i>
+              </div>
+              <span class="text-light-muted small">Google Reviews</span>
+            </div>
+            <p class="fst-italic text-white small mb-3">
+              "Excelente lugar en Córdoba para ir con amigos o familia. Las hamburguesas están enormes, las alitas súper crujientes y las cervezas bien heladas."
+            </p>
+            <div class="d-flex align-items-center gap-2">
+              <div class="avatar-circle rounded-circle bg-orange text-white fw-bold d-flex align-items-center justify-content-center">
+                CR
+              </div>
+              <div>
+                <span class="d-block fw-bold small text-white">Carlos Ramírez</span>
+                <span class="text-light-muted" style="font-size: 0.75rem;">Cliente frecuente • Córdoba, Ver.</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

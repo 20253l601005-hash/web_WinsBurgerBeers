@@ -1,0 +1,155 @@
+<div class="container my-5">
+  <!-- Encabezado y Rol -->
+  <div class="d-flex flex-wrap justify-content-between align-items-center mb-4 border-bottom border-secondary pb-3 gap-2">
+    <div>
+      <h2 class="fw-bold text-white m-0">Panel Administrativo (CRUD)</h2>
+      <small class="text-secondary">Conectado con Fake Store API REST • Token JWT Activo</small>
+    </div>
+    <span class="badge px-3 py-2 fw-bold" [ngClass]="esAdmin ? 'bg-orange text-white' : 'bg-info text-dark'">
+      Rol: {{ esAdmin ? 'Administrador (Edición Total)' : 'Cliente (Solo Lectura)' }}
+    </span>
+  </div>
+
+  <!-- Feedback visible -->
+  <div *ngIf="feedback" class="alert d-flex align-items-center gap-2 rounded-3 mb-4" [ngClass]="'alert-' + tipoFeedback">
+    <i class="bi" [ngClass]="tipoFeedback === 'success' ? 'bi-check-circle-fill' : 'bi-exclamation-triangle-fill'"></i>
+    <span class="fw-semibold">{{ feedback }}</span>
+  </div>
+
+  <!-- Banner de Confirmación de Borrado -->
+  <div *ngIf="productoAEliminar" class="alert alert-danger border-danger d-flex flex-wrap justify-content-between align-items-center gap-3 mb-4 shadow">
+    <div>
+      <i class="bi bi-trash3-fill me-2"></i>
+      ¿Seguro que deseas eliminar <strong>{{ productoAEliminar.title }}</strong>? Esta acción no se puede deshacer.
+    </div>
+    <div class="d-flex gap-2">
+      <button (click)="productoAEliminar = null" class="btn btn-sm btn-outline-light">Cancelar</button>
+      <button (click)="ejecutarEliminacion()" class="btn btn-sm btn-danger fw-bold">Sí, Eliminar</button>
+    </div>
+  </div>
+
+  <div class="row g-4">
+    <!-- Formulario Crear / Editar -->
+    <div class="col-lg-4">
+      <div class="card bg-dark text-white border-secondary shadow p-4 rounded-4">
+        <h5 class="fw-bold mb-3 text-orange">
+          <i class="bi" [ngClass]="editandoId ? 'bi-pencil-square' : 'bi-plus-circle-fill'"></i>
+          {{ editandoId ? 'Editar Producto' : 'Nuevo Producto' }}
+        </h5>
+
+        <div *ngIf="!esAdmin" class="alert alert-warning small">
+          Tu rol actual es de solo lectura. Inicia sesión como <strong>Administrador</strong> para crear o editar.
+        </div>
+
+        <form #prodForm="ngForm" (ngSubmit)="guardarProducto(prodForm)">
+          <div class="mb-2">
+            <label class="form-label small text-light fw-semibold">Nombre del Platillo *</label>
+            <input type="text" name="formTitle" [(ngModel)]="formTitle" [disabled]="!esAdmin" required class="form-control bg-dark text-white border-secondary" placeholder="Ej. Doble Tocino" />
+          </div>
+
+          <div class="mb-2">
+            <label class="form-label small text-light fw-semibold">Categoría *</label>
+            <select name="formCategory" [(ngModel)]="formCategory" [disabled]="!esAdmin" class="form-select bg-dark text-white border-secondary">
+              <option value="Hamburguesas">Hamburguesas</option>
+              <option value="Alitas & Boneless">Alitas & Boneless</option>
+              <option value="Entradas">Entradas</option>
+              <option value="Bebidas">Bebidas</option>
+            </select>
+          </div>
+
+          <div class="row g-2 mb-2">
+            <div class="col-6">
+              <label class="form-label small text-light fw-semibold">Precio ($) *</label>
+              <input type="number" name="formPrice" [(ngModel)]="formPrice" [disabled]="!esAdmin" required min="1" class="form-control bg-dark text-white border-secondary" placeholder="150" />
+            </div>
+            <div class="col-6">
+              <label class="form-label small text-light fw-semibold">Stock *</label>
+              <input type="number" name="formStock" [(ngModel)]="formStock" [disabled]="!esAdmin" required min="0" class="form-control bg-dark text-white border-secondary" placeholder="20" />
+            </div>
+          </div>
+
+          <div class="mb-2">
+            <label class="form-label small text-light fw-semibold">Descripción</label>
+            <textarea name="formDescription" [(ngModel)]="formDescription" [disabled]="!esAdmin" rows="2" class="form-control bg-dark text-white border-secondary" placeholder="Ingredientes..."></textarea>
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label small text-light fw-semibold">URL Imagen</label>
+            <input type="text" name="formImage" [(ngModel)]="formImage" [disabled]="!esAdmin" class="form-control bg-dark text-white border-secondary" />
+          </div>
+
+          <div class="d-flex gap-2">
+            <button type="submit" [disabled]="prodForm.invalid || !esAdmin || cargando" class="btn btn-orange w-100 fw-bold">
+              {{ editandoId ? 'Actualizar' : 'Guardar Producto' }}
+            </button>
+            <button *ngIf="editandoId" type="button" (click)="cancelarEdicion(prodForm)" class="btn btn-outline-secondary">
+              Cancelar
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- Tabla con Buscador, Paginación y Bitácora -->
+    <div class="col-lg-8">
+      <div class="card bg-dark text-white border-secondary shadow p-4 rounded-4">
+        <div class="d-flex flex-wrap justify-content-between align-items-center gap-2 mb-3">
+          <h5 class="fw-bold m-0">Inventario y Bitácora ({{ productosFiltrados.length }})</h5>
+          <input type="text" [(ngModel)]="busqueda" (ngModelChange)="paginaActual = 1" class="form-control form-control-sm bg-dark text-white border-secondary w-auto" placeholder="Buscar platillo o categoría..." />
+        </div>
+
+        <div *ngIf="cargando" class="text-center py-4">
+          <div class="spinner-border text-orange" role="status"></div>
+          <p class="small text-secondary mt-2 mb-0">Sincronizando con API...</p>
+        </div>
+
+        <div *ngIf="!cargando" class="table-responsive">
+          <table class="table table-dark table-hover align-middle mb-0">
+            <thead>
+              <tr class="table-secondary text-uppercase small">
+                <th>Platillo</th>
+                <th>Categoría</th>
+                <th>Precio</th>
+                <th>Stock</th>
+                <th>Bitácora (Últ. Mod.)</th>
+                <th class="text-end">Acciones</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let p of productosPaginados">
+                <td class="fw-bold text-orange">{{ p.title }}</td>
+                <td><span class="badge bg-secondary">{{ p.category }}</span></td>
+                <td>${{ p.price }}</td>
+                <td>{{ p.stock }} uds</td>
+                <td style="font-size: 0.78rem;">
+                  <span class="d-block text-light">{{ p.ultimaModificacion }}</span>
+                  <span class="text-secondary">Por: {{ p.modificadoPor }}</span>
+                </td>
+                <td class="text-end">
+                  <button (click)="seleccionarParaEditar(p)" [disabled]="!esAdmin" class="btn btn-sm btn-outline-warning me-1" title="Editar">
+                    <i class="bi bi-pencil-fill"></i>
+                  </button>
+                  <button (click)="confirmarEliminacion(p)" [disabled]="!esAdmin" class="btn btn-sm btn-outline-danger" title="Eliminar">
+                    <i class="bi bi-trash-fill"></i>
+                  </button>
+                </td>
+              </tr>
+              <tr *ngIf="productosPaginados.length === 0">
+                <td colspan="6" class="text-center text-secondary py-4">No se encontraron productos.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Paginación -->
+        <div class="d-flex justify-content-between align-items-center mt-3 pt-3 border-top border-secondary">
+          <small class="text-secondary">Página {{ paginaActual }} de {{ totalPaginas }}</small>
+          <div class="btn-group btn-group-sm">
+            <button (click)="paginaActual = paginaActual - 1" [disabled]="paginaActual <= 1" class="btn btn-outline-secondary text-white">Anterior</button>
+            <button (click)="paginaActual = paginaActual + 1" [disabled]="paginaActual >= totalPaginas" class="btn btn-outline-secondary text-white">Siguiente</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

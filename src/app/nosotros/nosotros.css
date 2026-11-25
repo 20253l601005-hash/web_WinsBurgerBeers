@@ -1,0 +1,17 @@
+.bg-nosotros {
+  background-color: #0b0b0b !important;
+}
+
+.bg-dark-card {
+  background-color: #141414 !important;
+  border: 1px solid #242424 !important;
+}
+
+.text-naranja {
+  color: #ff5500 !important;
+}
+
+.text-secondary-custom {
+  color: #a5a5a5 !important;
+  line-height: 1.6;
+}

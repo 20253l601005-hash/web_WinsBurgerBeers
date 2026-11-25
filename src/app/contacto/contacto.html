@@ -1,0 +1,300 @@
+<section class="contacto-section pt-5">
+  <div class="container pb-5">
+    <!-- BLOQUE PRINCIPAL INTACTO (Atención a la Afición + Formulario) -->
+    <div class="contacto-wrapper rounded-4 overflow-hidden shadow-lg">
+      <div class="row g-0">
+        
+        <!-- COLUMNA IZQUIERDA: Info de la marca, ubicación y redes -->
+        <div class="col-lg-5 p-4 p-md-5 info-panel d-flex flex-column justify-content-between text-white">
+          <div>
+            <span class="text-orange text-uppercase fw-bold small tracking-wide">
+              <i class="bi bi-chat-dots-fill me-1"></i> Estamos para servirte
+            </span>
+            <h3 class="fw-black text-uppercase mt-1 mb-3">
+              Atención a la <span class="text-orange">Afición</span>
+            </h3>
+            <p class="text-light-muted small mb-4">
+              ¿Quieres reservar mesa para ver el partido, cotizar un evento o tienes alguna duda sobre nuestro menú? Escríbenos y te respondemos volando.
+            </p>
+
+            <!-- Datos rápidos -->
+            <div class="d-flex flex-column gap-3 mb-4">
+              <a
+                href="https://maps.app.goo.gl/CiKuoAm6HGAdpiuy6?g_st=aw"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="d-flex align-items-center gap-3 text-decoration-none text-white location-link"
+              >
+                <div class="icon-box rounded-circle d-flex align-items-center justify-content-center">
+                  <i class="bi bi-geo-alt-fill text-orange"></i>
+                </div>
+                <div>
+                  <span class="d-block fw-bold small">
+                    Ubicación <i class="bi bi-box-arrow-up-right text-orange ms-1" style="font-size: 0.72rem;"></i>
+                  </span>
+                  <span class="text-light-muted small">Córdoba, Veracruz • Ver en Google Maps</span>
+                </div>
+              </a>
+
+              <div class="d-flex align-items-center gap-3">
+                <div class="icon-box rounded-circle d-flex align-items-center justify-content-center">
+                  <i class="bi bi-clock-fill text-orange"></i>
+                </div>
+                <div>
+                  <span class="d-block fw-bold small">Horario de Servicio</span>
+                  <span class="text-light-muted small">Mar a Dom • 2:00 PM – 11:30 PM</span>
+                </div>
+              </div>
+
+              <a
+                href="https://wa.me/522711707459?text=%C2%A1Hola%20Wing%27s%20Burger%20%26%20Beer%27s!%20Me%20gustar%C3%ADa%20hacer%20un%20pedido%20o%20reservar%20mesa."
+                target="_blank"
+                rel="noopener noreferrer"
+                class="d-flex align-items-center gap-3 text-decoration-none text-white location-link"
+              >
+                <div class="icon-box rounded-circle d-flex align-items-center justify-content-center">
+                  <i class="bi bi-whatsapp text-orange"></i>
+                </div>
+                <div>
+                  <span class="d-block fw-bold small">
+                    Pedidos y Reservas <i class="bi bi-box-arrow-up-right text-orange ms-1" style="font-size: 0.72rem;"></i>
+                  </span>
+                  <span class="text-light-muted small">WhatsApp: 271 170 7459</span>
+                </div>
+              </a>
+            </div>
+          </div>
+
+          <!-- Redes Sociales -->
+          <div class="pt-3 border-top border-secondary border-opacity-50">
+            <p class="text-light-muted small fw-semibold text-uppercase mb-3">
+              Síguenos en nuestras redes
+            </p>
+            <div class="d-flex gap-2">
+              <a
+                href="https://www.facebook.com/share/1CMXQ59sqn/"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="social-btn rounded-circle d-flex align-items-center justify-content-center"
+                aria-label="Facebook"
+              >
+                <i class="bi bi-facebook fs-5"></i>
+              </a>
+              <a
+                href="https://www.instagram.com/wingsburgerbeers?fqnt=MXN0bDg3ZXhja3d6MQ=="
+                target="_blank"
+                rel="noopener noreferrer"
+                class="social-btn rounded-circle d-flex align-items-center justify-content-center"
+                aria-label="Instagram"
+              >
+                <i class="bi bi-instagram fs-5"></i>
+              </a>
+              <a
+                href="https://wa.me/522711707459?text=%C2%A1Hola%20Wing%27s%20Burger%20%26%20Beer%27s!%20Me%20gustar%C3%ADa%20hacer%20un%20pedido%20o%20reservar%20mesa."
+                target="_blank"
+                rel="noopener noreferrer"
+                class="social-btn rounded-circle d-flex align-items-center justify-content-center"
+                aria-label="WhatsApp"
+              >
+                <i class="bi bi-whatsapp fs-5"></i>
+              </a>
+              <a
+                href="https://maps.app.goo.gl/CiKuoAm6HGAdpiuy6?g_st=aw"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="social-btn rounded-circle d-flex align-items-center justify-content-center"
+                aria-label="Ubicación"
+              >
+                <i class="bi bi-geo-alt-fill fs-5"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- COLUMNA DERECHA: Formulario Horizontal -->
+        <div class="col-lg-7 p-4 p-md-5 form-panel text-white d-flex flex-column justify-content-center">
+          <div class="mb-4">
+            <h4 class="fw-bold mb-1">Envíanos un mensaje</h4>
+            <p class="text-light-muted small mb-0">Completa los campos y nuestro equipo se pondrá en contacto contigo.</p>
+          </div>
+
+          <div *ngIf="enviado" class="alert alert-success d-flex align-items-center gap-2 rounded-3 py-2 px-3 mb-3">
+            <i class="bi bi-check-circle-fill fs-5"></i>
+            <span class="small fw-semibold">¡Mensaje enviado con éxito! Te responderemos muy pronto.</span>
+          </div>
+
+          <form #contactoForm="ngForm" (ngSubmit)="enviarContacto(contactoForm)">
+            <div class="row g-3 mb-3">
+              <div class="col-md-6">
+                <label class="form-label small text-light fw-semibold">Nombre Completo *</label>
+                <input 
+                  type="text" 
+                  name="nombre" 
+                  [(ngModel)]="nombre"
+                  #nombreCtrl="ngModel" 
+                  required 
+                  minlength="3"
+                  class="form-control custom-input text-white" 
+                  [class.is-invalid]="nombreCtrl.invalid && (nombreCtrl.dirty || nombreCtrl.touched)"
+                  placeholder="Tu nombre completo">
+                <div *ngIf="nombreCtrl.invalid && (nombreCtrl.dirty || nombreCtrl.touched)" class="invalid-feedback">
+                  <span *ngIf="nombreCtrl.errors?.['required']">El nombre es obligatorio.</span>
+                  <span *ngIf="nombreCtrl.errors?.['minlength']">Debe tener al menos 3 caracteres.</span>
+                </div>
+              </div>
+
+              <div class="col-md-6">
+                <label class="form-label small text-light fw-semibold">Correo Electrónico *</label>
+                <input 
+                  type="email" 
+                  name="email" 
+                  [(ngModel)]="correo"
+                  #emailCtrl="ngModel" 
+                  required 
+                  email
+                  class="form-control custom-input text-white" 
+                  [class.is-invalid]="emailCtrl.invalid && (emailCtrl.dirty || emailCtrl.touched)"
+                  placeholder="ejemplo@correo.com">
+                <div *ngIf="emailCtrl.invalid && (emailCtrl.dirty || emailCtrl.touched)" class="invalid-feedback">
+                  <span *ngIf="emailCtrl.errors?.['required']">El correo es obligatorio.</span>
+                  <span *ngIf="emailCtrl.errors?.['email']">Ingresa un correo electrónico válido.</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="mb-4">
+              <label class="form-label small text-light fw-semibold">Mensaje / Consulta *</label>
+              <textarea 
+                name="mensaje" 
+                [(ngModel)]="mensaje"
+                #mensajeCtrl="ngModel" 
+                required 
+                minlength="10"
+                class="form-control custom-input text-white" 
+                [class.is-invalid]="mensajeCtrl.invalid && (mensajeCtrl.dirty || mensajeCtrl.touched)"
+                rows="3" 
+                placeholder="¿En qué podemos ayudarte?"></textarea>
+              <div *ngIf="mensajeCtrl.invalid && (mensajeCtrl.dirty || mensajeCtrl.touched)" class="invalid-feedback">
+                <span *ngIf="mensajeCtrl.errors?.['required']">El mensaje no puede estar vacío.</span>
+                <span *ngIf="mensajeCtrl.errors?.['minlength']">El mensaje debe tener al menos 10 caracteres.</span>
+              </div>
+            </div>
+
+            <div class="d-flex flex-column flex-sm-row align-items-sm-center justify-content-between gap-3">
+              <span class="text-light-muted small">
+                <i class="bi bi-shield-check text-orange me-1"></i> Tus datos están seguros con nosotros.
+              </span>
+              <button 
+                type="submit" 
+                [disabled]="contactoForm.invalid" 
+                class="btn btn-orange px-5 py-2 rounded-pill fw-bold shadow">
+                <i class="bi bi-send-fill me-2"></i> Enviar Mensaje
+              </button>
+            </div>
+          </form>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER INFERIOR PULIDO (Ancho completo, simétrico y limpio) -->
+  <footer class="footer-bar border-top border-secondary border-opacity-25 pt-5 pb-4">
+    <div class="container">
+      
+      <!-- Fila 1: Enlaces principales centrados -->
+      <div class="d-flex flex-wrap justify-content-center align-items-center gap-4 gap-md-5 pb-4 border-bottom border-secondary border-opacity-25">
+        <a routerLink="/productos" class="footer-top-link text-orange fw-bold text-uppercase text-decoration-none">
+          Menú y Productos
+        </a>
+        <a routerLink="/nosotros" class="footer-top-link text-orange fw-bold text-uppercase text-decoration-none">
+          Nosotros
+        </a>
+        <a
+          href="https://maps.app.goo.gl/CiKuoAm6HGAdpiuy6?g_st=aw"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="footer-top-link text-orange fw-bold text-uppercase text-decoration-none"
+        >
+          Encuentra Wing's Burger
+        </a>
+        <a
+          href="https://wa.me/522711707459?text=%C2%A1Hola%20Wing%27s%20Burger%20%26%20Beer%27s!%20Quiero%20hacer%20un%20pedido."
+          target="_blank"
+          rel="noopener noreferrer"
+          class="footer-top-link text-orange fw-bold text-uppercase text-decoration-none"
+        >
+          Pedidos WhatsApp
+        </a>
+      </div>
+
+      <!-- Fila 2: 3 Columnas equilibradas en una sola línea -->
+      <div class="d-flex flex-column flex-lg-row justify-content-between align-items-center gap-3 py-4">
+        
+        <!-- Izquierda: Marca con ícono -->
+        <div class="d-flex align-items-center gap-2">
+          <i class="bi bi-shop text-orange fs-5"></i>
+          <span class="fw-bold text-uppercase tracking-wide text-white small">
+            Wing's <span class="text-orange">Burger & Beer's</span>
+          </span>
+        </div>
+
+        <!-- Centro: Ubicación y Teléfono sin cortarse -->
+        <div class="text-center">
+          <span class="text-light-muted small text-uppercase tracking-wide">
+            Córdoba, Veracruz <span class="text-orange mx-2">•</span> Tel: 271 170 7459
+          </span>
+        </div>
+
+        <!-- Derecha: Botones circulares de redes sociales -->
+        <div class="d-flex align-items-center gap-2">
+          <a
+            href="https://www.facebook.com/share/1CMXQ59sqn/"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="footer-social-pill rounded-circle d-flex align-items-center justify-content-center"
+            aria-label="Facebook"
+          >
+            <i class="bi bi-facebook"></i>
+          </a>
+          <a
+            href="https://www.instagram.com/wingsburgerbeers?fqnt=MXN0bDg3ZXhja3d6MQ=="
+            target="_blank"
+            rel="noopener noreferrer"
+            class="footer-social-pill rounded-circle d-flex align-items-center justify-content-center"
+            aria-label="Instagram"
+          >
+            <i class="bi bi-instagram"></i>
+          </a>
+          <a
+            href="https://wa.me/522711707459"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="footer-social-pill rounded-circle d-flex align-items-center justify-content-center"
+            aria-label="WhatsApp"
+          >
+            <i class="bi bi-whatsapp"></i>
+          </a>
+          <a
+            href="https://maps.app.goo.gl/CiKuoAm6HGAdpiuy6?g_st=aw"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="footer-social-pill rounded-circle d-flex align-items-center justify-content-center"
+            aria-label="Ubicación"
+          >
+            <i class="bi bi-geo-alt-fill"></i>
+          </a>
+        </div>
+
+      </div>
+
+      <!-- Fila 3: Copyright -->
+      <div class="text-center pt-2">
+        <p class="text-secondary text-uppercase mb-0" style="font-size: 0.72rem; letter-spacing: 1.2px;">
+          © 2026 Wing's Burger & Beer's. Todos los derechos reservados.
+        </p>
+      </div>
+
+    </div>
+  </footer>
+</section>

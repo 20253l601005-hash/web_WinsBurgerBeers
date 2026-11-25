@@ -1,0 +1,161 @@
+.hero-section {
+  background: radial-gradient(circle at top right, rgba(253, 126, 20, 0.14), transparent 45%),
+              var(--bg-main, #121212);
+}
+
+.fw-black {
+  font-weight: 900;
+}
+
+.tracking-wide {
+  letter-spacing: 1.5px;
+}
+
+.text-light-muted {
+  color: #c8ccd0;
+}
+
+.badge-brand {
+  background-color: rgba(253, 126, 20, 0.12);
+  border: 1px solid rgba(253, 126, 20, 0.35);
+  color: #ffffff;
+}
+
+.hero-img-wrapper {
+  max-width: 520px;
+}
+
+.hero-main-img {
+  border: 2px solid #2e3238;
+  object-fit: cover;
+  width: 100%;
+  height: 440px;
+}
+
+.floating-card {
+  position: absolute;
+  background-color: rgba(28, 30, 33, 0.94);
+  backdrop-filter: blur(8px);
+  border: 1px solid #383c44;
+  z-index: 3;
+}
+
+.top-card {
+  top: -18px;
+  left: -18px;
+}
+
+.bottom-card {
+  bottom: -18px;
+  right: -18px;
+  max-width: 260px;
+}
+
+@media (max-width: 576px) {
+  .top-card {
+    top: 12px;
+    left: 12px;
+  }
+  .bottom-card {
+    bottom: 12px;
+    right: 12px;
+  }
+}
+
+.icon-badge {
+  width: 42px;
+  height: 42px;
+  flex-shrink: 0;
+}
+
+/* SECCIÓN 2: CARRUSEL DE OFERTAS */
+.ofertas-section {
+  background-color: #15171a;
+  border-top: 1px solid #26292e;
+}
+
+.carousel-nav-btn {
+  width: 42px;
+  height: 42px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.oferta-card {
+  background-color: #1c1e21;
+  border: 1px solid #32363c;
+}
+
+.oferta-img {
+  height: 390px;
+  object-fit: cover;
+}
+
+.slide-dot {
+  width: 12px;
+  height: 8px;
+  background-color: #3f444c;
+  transition: all 0.3s ease;
+}
+
+.slide-dot.active {
+  width: 32px;
+  background-color: var(--brand-orange, #fd7e14);
+}
+
+/* SECCIÓN 3: CATEGORÍAS */
+.categorias-section {
+  background-color: var(--bg-main, #121212);
+}
+
+.cat-card {
+  background-color: #1c1e21;
+  border: 1px solid #2e3238;
+  transition: transform 0.25s ease, border-color 0.25s ease;
+}
+
+.cat-card:hover {
+  transform: translateY(-6px);
+  border-color: var(--brand-orange, #fd7e14);
+}
+
+.cat-icon {
+  width: 52px;
+  height: 52px;
+  background-color: rgba(253, 126, 20, 0.12);
+  border: 1px solid rgba(253, 126, 20, 0.3);
+}
+
+/* SECCIÓN 4: SALSAS Y AMBIENTE */
+.experiencia-section {
+  background-color: #141517;
+  border-top: 1px solid #26292e;
+}
+
+.salsa-card {
+  background-color: #1c1e21;
+  border: 1px solid #2e3238;
+  transition: transform 0.25s ease, border-color 0.25s ease;
+}
+
+.salsa-card:hover {
+  transform: translateY(-5px);
+  border-color: #fd7e14;
+}
+
+.ambiente-banner {
+  background: linear-gradient(135deg, #221c18 0%, #1a1c20 100%);
+  border: 1px solid #34383f;
+}
+
+.review-box {
+  background-color: #15171a;
+  border: 1px solid #2c3036;
+}
+
+.avatar-circle {
+  width: 36px;
+  height: 36px;
+  font-size: 0.8rem;
+}
